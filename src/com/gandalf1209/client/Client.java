@@ -4,14 +4,14 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-import com.gandalf1209.game.MainGame;
-
 public class Client extends Thread {
 
 	private static InetAddress ip;
 	private static int port;
 	private static DatagramSocket socket;
 	private static Client client;
+	
+	public static String username;
 	
 	public static void main(String[] args) {
 		try {
@@ -21,7 +21,6 @@ public class Client extends Thread {
 			port = 12098;
 			socket = new DatagramSocket();
 			client.start();
-			sendData("/c/");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -38,7 +37,7 @@ public class Client extends Thread {
 				if (args[0].equals("/c/")) {
 					if (args[1].equals("OK")) {
 						System.out.println("Connected!");
-						new MainGame().init();
+						Login.start();
 					} else {
 						System.out.println("Error: " + args[1]);
 						System.exit(1);
@@ -48,6 +47,12 @@ public class Client extends Thread {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public static void setInfo(String username) {
+		Client.username = username;
+		sendData("/c/");
+		sendData("/login/~" + Client.username);
 	}
 	
 	public static void sendData(String data) {
