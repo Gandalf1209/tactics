@@ -4,6 +4,8 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
+import com.gandalf1209.game.MainGame;
+
 public class Client extends Thread {
 
 	private static InetAddress ip;
@@ -36,6 +38,7 @@ public class Client extends Thread {
 				if (args[0].equals("/c/")) {
 					if (args[1].equals("OK")) {
 						System.out.println("Connected!");
+						new MainGame().init();
 					} else {
 						System.out.println("Error: " + args[1]);
 						System.exit(1);
