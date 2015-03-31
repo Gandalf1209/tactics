@@ -13,12 +13,13 @@ public class Player {
 	}
 	
 	public static String playerToData(Player p) {
-		String data = p.getID() + "$" + p.getX() + "$" + p.getY();
+		String data = p.getID() + "&" + p.getX() + "&" + p.getY();
 		return data;
 	}
 	
 	public static Player dataToPlayer(String data) {
-		String[] s = data.split("$");
+		String[] s = data.split("&");
+		
 		int id = Integer.parseInt(s[0]);
 		int x = Integer.parseInt(s[1]);
 		int y = Integer.parseInt(s[2]);

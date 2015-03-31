@@ -48,6 +48,7 @@ public class Server extends Thread {
 					User u = new User(args[1]);
 					u.initPlayers(4);
 					users.add(u);
+					sendData("/login/~4", packet.getAddress(), packet.getPort());
 				}
 				if (args[0].equals("/upd/")) {
 					int l = getLocByName(args[1]);
@@ -78,6 +79,7 @@ public class Server extends Thread {
 			User u = users.get(i);
 			if (u.getName().equals(name)) {
 				loc = i;
+				break;
 			}
 		}
 		return loc;
